@@ -15,5 +15,7 @@
     @yield('php-question-3')
     @yield('login')
     @yield('dashboard')
+    @yield('artists')
+    @yield('albums')
 </body>
 </html>

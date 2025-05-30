@@ -19,7 +19,7 @@ class ArtistAlbumSeeder extends Seeder
     {
         $faker = Faker::create();
         $file = fopen(database_path('seeders/artists_albums.csv'), 'r');
-        fgetcsv($file); // Skip header
+        fgetcsv($file);
 
         while (($data = fgetcsv($file)) !== false) {
             [$artistName, $albumName, $sales, $dateReleased, $lastUpdate] = $data;
