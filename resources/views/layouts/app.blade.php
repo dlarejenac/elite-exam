@@ -13,5 +13,7 @@
     @yield('php-question-1')
     @yield('php-question-2')
     @yield('php-question-3')
+    @yield('login')
+    @yield('dashboard')
 </body>
 </html>

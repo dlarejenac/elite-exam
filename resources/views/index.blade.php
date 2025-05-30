@@ -14,11 +14,8 @@
             <a href="{{ url('/php') }}" class="px-6 py-3 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition">
                 PHP Exam
             </a>
-            <a href="" class="px-6 py-3 bg-green-600 text-white rounded-lg shadow hover:bg-green-700 transition">
-                MySQL Exam
-            </a>
-            <a href="" class="px-6 py-3 bg-purple-600 text-white rounded-lg shadow hover:bg-purple-700 transition">
-                Laravel Exam
+            <a href="{{ route('admin.login') }}" class="px-6 py-3 bg-orange-600 text-white rounded-lg shadow hover:bg-orange-700 transition">
+                MySQL and Laravel Exam
             </a>
         </div>
     </div>
