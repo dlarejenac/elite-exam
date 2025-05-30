@@ -18,27 +18,32 @@ class ArtistAlbumSeeder extends Seeder
     public function run(): void
     {
         $faker = Faker::create();
-    $file = fopen(database_path('seeders/artists_albums.csv'), 'r');
-    fgetcsv($file);
+        $file = fopen(database_path('seeders/artists_albums.csv'), 'r');
+        fgetcsv($file); // Skip header
 
-    while (($data = fgetcsv($file)) !== false) {
-        [$artistName, $albumName, $sales, $dateReleased, $lastUpdate] = $data;
+        while (($data = fgetcsv($file)) !== false) {
+            [$artistName, $albumName, $sales, $dateReleased, $lastUpdate] = $data;
 
-        $artist = Artist::firstOrCreate(
-            ['name' => $artistName],
-            ['code' => strtoupper(Str::random(5))]
-        );
+            $artist = Artist::firstOrCreate(
+                ['name' => $artistName],
+                ['code' => strtoupper(Str::random(5))]
+            );
 
-        $artist->albums()->create([
-            'name' => $albumName,
-            'sales' => (int) $sales,
-            'year' => date('Y', strtotime($dateReleased)),
-            'cover' => null,
-            'created_at' => $lastUpdate,
-            'updated_at' => $lastUpdate
-        ]);
-    }
+            $year = 2022 ?: date('Y', strtotime($dateReleased));
 
-    fclose($file);
+            $createdAt = \DateTime::createFromFormat('ymd', $dateReleased)?->format('Y-m-d') ?? now();
+            $updatedAt = \DateTime::createFromFormat('ymd', $lastUpdate)?->format('Y-m-d') ?? now();
+            
+            $artist->albums()->create([
+                'name' => $albumName,
+                'sales' => (int) $sales,
+                'year' => $year,
+                'cover' => null,
+                'created_at' => $createdAt,
+                'updated_at' => $updatedAt
+            ]);
+        }
+
+        fclose($file);
     }
 }
